@@ -1,0 +1,40 @@
+
+version: "3.9"
+
+services:
+  react:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+    networks:
+      - app-network
+
+  springboot:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - app-network
+    depends_on:
+      - database
+
+  database:
+    image: mysql:8.0
+    container_name: consistency_db
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: consistency
+      MYSQL_USER: consistencyuser
+      MYSQL_PASSWORD: consistencypass
+    ports:
+      - "3306:3306"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
