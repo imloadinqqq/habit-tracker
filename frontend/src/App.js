@@ -57,40 +57,42 @@ function App() {
   };
 
   return (
-    <div>
-      <h1>Habits Tracker</h1>
+    <div class='text-center'>
+      <h1 class="text-3xl font-bold underline pb-5">Habits Tracker</h1>
       {error ? (
-        <p style={{ color: 'red' }}>{error}</p>
+        <p class="text-red-600 object-right">{error}</p>
       ) : (
         <ul>
           {habits.map((habit) => (
             <li key={habit.id}>
               <strong>{habit.name}</strong>: {habit.description}{' '}
-              <button onClick={() => handleDelete(habit.id)}>Delete</button>
+              <button class='border' onClick={() => handleDelete(habit.id)}>Delete</button>
             </li>
           ))}
         </ul>
       )}
-      <form onSubmit={handleSubmit}>
-        <label>
-          Name:
-          <input
-            type="text"
-            value={data.name || ''}
-            onChange={(e) => setData({ ...data, name: e.target.value })}
-          />
-        </label>
-        <br />
-        <label>
-          Description:
-          <input
-            type="text"
-            value={data.description || ''}
-            onChange={(e) => setData({ ...data, description: e.target.value })}
-          />
-        </label>
-        <br />
-        <button type="submit">Submit</button>
+      <form class="drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]" onSubmit={handleSubmit}>
+        <div class='py-5'>
+          <label class='italic'>
+            Name:
+            <input
+              type="text"
+              value={data.name || ''}
+              onChange={(e) => setData({ ...data, name: e.target.value })}
+            />
+          </label>
+        </div>
+        <div class='py-5'>
+          <label class='italic'>
+            Description:
+            <input
+              type="text"
+              value={data.description || ''}
+              onChange={(e) => setData({ ...data, description: e.target.value })}
+            />
+          </label>
+        </div>
+        <button class='border' type="submit">Submit</button>
       </form>
     </div>
   );
